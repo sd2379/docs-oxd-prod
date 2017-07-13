@@ -16,7 +16,7 @@ markdown_extensions:
 pages:
 - Home: 'index.md'
 # Protocol
-- Release Notes: 'release/release.md'
+- Release Notes: 'release notes/index.md'
 - oxd Server:
     - 'Protocol': 'protocol/index.md'
     - 'Installation': 'install/index.md'
