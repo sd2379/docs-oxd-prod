@@ -8,6 +8,7 @@ oxd is a middleware service that can be used to simplify the process of integrat
     If you need to integrate other types of apps with your Gluu Server, like single-page apps (SPAs) or native apps, review the [SSO integration guide](https://gluu.org/docs/ce/integration/) in the Gluu Server documentation.    
 
 ## How it Works
+
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/)     
 Step 2: [Deploy oxd](./install/index.md)     
 Step 3: [Configure oxd](./conf/index.md)     
