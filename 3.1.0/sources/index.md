@@ -2,23 +2,11 @@
 
 oxd is a middleware service that can be used to simplify the process of integrating server-side web applications with a standard OpenID Connect Provider (OP) like the [Gluu Server](https://gluu.org/gluu-server).
 
-[Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
-
 !!! Note
     If you need to integrate other types of apps with your Gluu Server, like single-page apps (SPAs) or native apps, review the [SSO integration guide](https://gluu.org/docs/ce/integration/) in the Gluu Server documentation.    
 
-## How it Works
-
-Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/)     
-Step 2: [Deploy oxd](./install/index.md)     
-Step 3: [Configure oxd](./conf/index.md)     
-Step 4: [Run oxd](./install/index.md)      
-Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
-
-!!! Note
-    If you need an OpenID Connect Provider (OP) to authenticate users, you can use Google or download and deploy the free open source [Gluu Server](https://gluu.org/docs/ce/installation-guide/). 
-
 ## Overview
+
 The oxd server is designed to work as a standalone service demon. oxd is a web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service.
 
 By default, oxd is restricted to `localhost`, which means these APIs cannot be reached from another server on the network--only by services running locally on the server. 
@@ -26,7 +14,18 @@ By default, oxd is restricted to `localhost`, which means these APIs cannot be r
 oxd APIs can be called by any application that can make REST calls. Gluu also provides several native libraries that wrap the
 oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
+## How it Works
+
+Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
+Step 2: [Deploy oxd](./install/index.md);      
+Step 3: [Configure oxd and add your license](./conf/index.md);      
+Step 4: [Run oxd](./install/index.md);      
+Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.    
+
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
+
+!!! Note
+    If you need an OpenID Connect Provider (OP) to authenticate users, you can use Google or download and deploy the free open source [Gluu Server](https://gluu.org/docs/ce/installation-guide/). 
 
 ## Technical Architecture
 oxd is middleware service that simplifies the process of properly securing applications with OpenID Connect and UMA, two standard profiles of OAuth 2.0 for federated authentication and authorization, respectively. 
