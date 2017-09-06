@@ -18,11 +18,24 @@ oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 ## How it Works
 
+### oxd-local (for localhost communication only or in protected networks, e.g. VPN, then switch off localhost_only=false configuration)
+
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
 Step 2: [Deploy oxd-local](./install/index.md);      
 Step 3: [Configure oxd-local and add your license](./conf/index.md);      
 Step 4: [Run oxd-local](./install/index.md);      
 Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
+
+### oxd-web (for https REST commuication)
+
+Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
+Step 2: [Deploy oxd-local](./install/index.md);      
+Step 3: [Deploy oxd-web](./install/index.md);      
+Step 4: [Configure oxd-local and add your license](./conf/index.md);      
+Step 5: [Configure oxd-web](./conf/index.md);      
+Step 6: [Run oxd-local](./install/index.md);      
+Step 7: [Run oxd-web](./install/index.md);      
+Step 8: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
 
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
 
@@ -104,10 +117,16 @@ oxd is commercial software licensed by Gluu. Get your license and a $50 credit b
 ## FAQ's
 
 **What is oxd?**       
-oxd is a mediator: it provides API's that can be called by a web application that are easier than directly calling the API's of an OpenID Connect Provider (OP) or an UMA Authorization Server (AS).
+Under oxd we mean oxd-local and oxd-web. oxd is a mediator: it provides API's that can be called by a web application that are easier than directly calling the API's of an OpenID Connect Provider (OP) or an UMA Authorization Server (AS).
 
-**Where do I deploy oxd?**    
-oxd is deployed on the same server as the web application(s) you want to protect.
+**What is oxd-local?**       
+oxd-local is a standalon service with socket connection. By default it's restricted to localhost only (by `localhost_only: true` configuration in `oxd-conf.json`). It's possible to turn off this restriction if set `localhost_only: false` in `oxd-conf.json`
+
+**What is oxd-web?**
+oxd-web is a standalone RESTful Jetty based server which accepts HTTP calls and redirects them to `oxd-local`. In order to use `oxd-web` `oxd-local` server must be installed. 
+
+**Where do I deploy oxd-local?**    
+oxd-local is deployed on the same server as the web application(s) you want to protect.
 
 **Why should I use oxd?**     
 oxd offers a few key improvements over the traditional model of embedding OAuth 2.0 code in your applications:
