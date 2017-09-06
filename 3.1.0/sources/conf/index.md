@@ -13,26 +13,33 @@ The contents of the configuration file is as follows:
 ```
 oxd-conf.json
 {
+    "server_name":"",
     "port":8099,
     "localhost_only":true,
     "time_out_in_seconds":0,
     "use_client_authentication_for_pat":true,
-    "use_client_authentication_for_aat":true,
     "trust_all_certs":true,
     "trust_store_path":"",
     "trust_store_password":"",
     "license_id":"",
     "public_key":"",
     "public_password":"",
-    "license_password":""
+    "license_password":"",
+    "support-google-logout":true,
+    "state_expiration_in_minutes":5,
+    "nonce_expiration_in_minutes":5,
+    "public_op_key_cache_expiration_in_minutes":60,
+    "protect_commands_with_access_token":false,
+    "uma2_auto_register_claims_gathering_endpoint_as_redirect_uri_of_client":true,
+    "migration_source_folder_path":""
 }
 ```
 
+* server_name - random name which will be used by License Server. It is good idea to put some sensible name here.
 * port - oxd socket port
 * localhost_only - flag to restrict communication
 * time_out_in_seconds - time out for oxd socket (measured in seconds). oxd closes sockets automatically after this period of time (stops listen commands). Zero means listen indefinitely.
 * use_client_authentication_for_pat - true if client authentication is required. If false than user authentication is performed which requires user_id and user_secret to be specified during the register_site command.
-* use_client_authentication_for_aat - true if client authentication is required, if false than user authentication is performed which require user_id and user_secret specified during register_site command.
 * trust_all_certs - true to trust all certificates, if false then trust_store_path must be specified to store with valid certificates
 * trust_store_path - Path to Java .jks trust store to be used for an SSL connection.
 * trust_store_password - password of trust store
@@ -40,8 +47,15 @@ oxd-conf.json
 * public_key - Will be supplied when you register for a license. It's very big--make sure you add it as one line with no spaces (if your mail client added line breaks).
 * public_password - Will be supplied when you register for a license.
 * license_password - Will be supplied when you register for a license.
+* support-google-logout - whether to support Google logout or not. Please use it only if you use Google as OP together with `oxd-local`.
+* state_expiration_in_minutes - expiration time of `state` parameter in seconds
+* nonce_expiration_in_minutes - expiration time of `nonce` parameter in seconds
+* public_op_key_cache_expiration_in_minutes - OP keys are put into cache after fetching. This value controls how long to keep it in cache (after expiration on first attempt keys are fetched again from OP).
+* protect_commands_with_access_token - if you use `oxd-local` standalone locally than this value can be `false`. If `oxd-web` is used then this value MUST be `true` in order to protect communication between `oxd-web` and client application (RP).
+* uma2_auto_register_claims_gathering_endpoint_as_redirect_uri_of_client - says to `oxd-local` whether automatically register `Glaims Gathering Endpoint` as `redirect_uri` for given client. It is useful for UMA 2 clients that wish to force authorization against Gluu Server (OP).
+* migration_source_folder_path - `oxd-local` has built-in migration from older version of `oxd-local` (previously called `oxd-server`). To migrate old json files from previous versions please specify path to folder/directory that contains those json files in this property. Those files will be read and imported one time (during restart `oxd-local` will not import them again). Note, if you are under Windows OS don't forget to escape path separator, e.g. `C:\\OXD_OLD\\oxd-server\\conf`
 
-Need an oxd license? Register on the [oxd website](https://oxd.gluu.org). 
+Need an oxd-local license? Register on the [oxd website](https://oxd.gluu.org). 
 
 ## oxd-default-site-config.json
 
@@ -49,12 +63,14 @@ Need an oxd license? Register on the [oxd website](https://oxd.gluu.org).
 conf/oxd-default-site-config.json
 {
     "op_host":"",
+    "op_discovery_path":"",
     "authorization_redirect_uri":"",
     "post_logout_redirect_uri":"",
+    "redirect_uris":[""],
     "response_types":["code"],
     "grant_type":["authorization_code"],
-    "acr_values":["basic"],
-    "scope":["openid", "profile"],
+    "acr_values":[""],
+    "scope":["openid", "profile", "email"],
     "ui_locales":["en"],
     "claims_locales":["en"],
     "client_jwks_uri":"",
@@ -64,8 +80,10 @@ conf/oxd-default-site-config.json
 
 * op_host - must point to a valid 
 [Gluu Server CE installation](https://gluu.org/docs/ce/3.0.1/installation-guide/install/). (Sample : "op_host":"https://idp.example.org")
+* op_discovery_path - path to discovery document. For example if it's `https://example.com/.well-known/openid-configuration` then path is blank ``. But if it is `https://example.com/oxauth/.well-known/openid-configuration` then path it `oxauth`
 * authorization_redirect_uri - URL that the OpenID Connect Provider (OP) will redirect the person to after  successful authentication
 * post_logout_redirect_uri - URL to which the RP is requesting that the End-User's User Agent be redirected after a logout has been performed
+* redirect_uris - additional URLs that the OpenID Connect Provider (OP) will use to redirect the person to after  successful authentication
 * response_types - JSON array containing a list of the OAuth 2.0 response_type values that the site is declaring that it will restrict itself to using
 * grant_type - JSON array containing a list of the OAuth 2.0 Grant Types that the Client is declaring that it will restrict itself to using
 * acr_values - specified authentication method (basic, duo, u2f)
