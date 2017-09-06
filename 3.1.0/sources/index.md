@@ -8,25 +8,29 @@ oxd is a middleware service that can be used to simplify the process of integrat
 ## Overview
 
 The oxd consists of :
-- oxd-local - designed to work as a standalone service demon via
-- oxd-web - web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service.
+- oxd-local - designed to work as a standalone service demon via sockets.
+- oxd-web - web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service. oxd-web requires oxd-local to be installed.
 
 By default, oxd-local is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
+
+!!! Note 
+    oxd-local can be used not only on localhost in protected networks, e.g. VPN, then switch off localhost_only=false configuration.     
 
 oxd APIs can be called by any application that can make REST (oxd-local) or socket (oxd-local) calls. In addition, there are native libraries that wrap the
 oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 ## How it Works
 
-### oxd-local (for localhost communication only or in protected networks, e.g. VPN, then switch off localhost_only=false configuration)
+### oxd-local (for localhost only)
 
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
 Step 2: [Deploy oxd-local](./install/index.md);      
 Step 3: [Configure oxd-local and add your license](./conf/index.md);      
 Step 4: [Run oxd-local](./install/index.md);      
-Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
+Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.
+    
 
-### oxd-web (for https REST commuication)
+### oxd-web (for https REST communication)
 
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
 Step 2: [Deploy oxd-local](./install/index.md);      
@@ -43,7 +47,7 @@ Step 8: Integrate apps with your OP using the oxd REST API, or one of the native
     If you need an OpenID Connect Provider (OP) to authenticate users, you can use Google or download and deploy the free open source [Gluu Server](https://gluu.org/docs/ce/installation-guide/). 
 
 ## Technical Architecture
-By default, oxd is restricted to `localhost`, which means its APIs can only be reached by services running locally on the server. Therefore oxd must be installed on each server that hosts a target application. 
+By default, oxd-local is restricted to `localhost`, which means its APIs can only be reached by services running locally on the server. Therefore oxd-local must be installed on each server that hosts a target application. 
 
 ![oxd-technical-architecture](https://cloud.githubusercontent.com/assets/5271048/22804205/919112e8-eedd-11e6-85a7-60eab8f51585.png)
 
