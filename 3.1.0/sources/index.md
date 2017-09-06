@@ -21,25 +21,18 @@ oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 ## How it Works
 
-### oxd-local (for localhost only)
-
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
 Step 2: [Deploy oxd-local](./install/index.md);      
 Step 3: [Configure oxd-local and add your license](./conf/index.md);      
 Step 4: [Run oxd-local](./install/index.md);      
-Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.
-    
+Step 5: Integrate apps with your OP using the oxd-local sockets, or one of the native libraries or plugins.
+  
+Optionally if it's required to have RESTful communication `oxd-web` extension can be installed.    
 
-### oxd-web (for https REST communication)
-
-Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
-Step 2: [Deploy oxd-local](./install/index.md);      
-Step 3: [Deploy oxd-web](./install/index.md);      
-Step 4: [Configure oxd-local and add your license](./conf/index.md);      
-Step 5: [Configure oxd-web](./conf/index.md);      
-Step 6: [Run oxd-local](./install/index.md);      
-Step 7: [Run oxd-web](./install/index.md);      
-Step 8: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
+Step 6: [Deploy oxd-web](./install/index.md);      
+Step 7: [Configure oxd-web](./conf/index.md);      
+Step 8: [Run oxd-web](./install/index.md);      
+Step 9: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
 
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
 
