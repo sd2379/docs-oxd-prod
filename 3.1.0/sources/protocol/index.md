@@ -416,6 +416,37 @@ Response:
 }
 ```
 
+#### Get Access Token by Refresh Token
+
+Gets Access Token by Refresh Token.
+
+Request:
+
+```json
+{
+    "command":"get_access_token_by_refresh_token",
+    "params": {
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- Required
+        "refresh_token":"I6IjIifX0",                              <- Required, refresh_token from get_tokens_by_code command
+        "scope":["openid","profile"],                             <- Optional. If not specified should grant access with scope provided in previous request
+        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
+    }
+}
+```
+
+Response:
+
+```
+{
+    "status":"ok",
+    "data":{
+        "access_token":"SlAV32hkKG",
+        "expires_in":3600,
+        "refresh_token":"aaAV32hkKG1"
+    }
+}
+```
+
 ## UMA 2 Authorization 
 UMA 2 is a profile of OAuth 2.0 that defines RESTful, JSON-based, standardized flows and constructs for coordinating the protection of any API or web resource. oxd makes it easy to secure applications with UMA 2 so that access management decisions--like who should be able to access which resources, using which devices, from which networks, etc.--can be delegated to your Gluu Server. 
 
@@ -598,38 +629,65 @@ Resource is not protected
 
 If your application is calling UMA 2 protected resources, use these API's to obtain an RPT token.
 
-#### UMA RP - Authorize RPT
+#### UMA RP - Get RPT
 
 Request:
 
 ```json
 {
-    "command":"uma_rp_authorize_rpt",
+    "command":"uma_rp_get_rpt",
     "params": {
-         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- REQUIRED
-         "rpt": "vF9dft4qmT",                                      <- REQUIRED
-         "ticket": "016f84e8-f9b9-11e0-bd6f-0021cc6004de",         <- REQUIRED
-         "protection_access_token":"<access token of the client>"  <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
+         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",   <- REQUIRED
+         "ticket": "016f84e8-f9b9-11e0-bd6f-0021cc6004de",  <- REQUIRED
+         "claim_token": "eyj0f9b9...",                      <- OPTIONAL
+         "claim_token_format": "http://openid.net/specs/openid-connect-core-1_0.html#IDToken",
+         "pct": "c2F2ZWRjb25zZW50",                         <- OPTIONAL                                                      
+         "rpt": "SSJHBSUSSJHVhjsgvhsgvshgsv",               <- OPTIONAL
+         "scope":["read"],                                  <- OPTIONAL,
+         "state": "af0ifjsldkj",                            <- OPTIONAL state that is returned from uma_rp_get_claims_gathering_url command
+         "protection_access_token": "ejt3425"               <- OPTIONAL, required if oxd-web is used          
     }
 }
 ```
 
-Authorized Response (Success):
+Success Response:
 
 ```json
 {
      "status":"ok",
+     "data":{
+         "access_token":"SSJHBSUSSJHVhjsgvhsgvshgsv",
+         "token_type":"Bearer",
+         "pct":"c2F2ZWRjb25zZW50",
+         "upgraded":true
+     }
 }
 ```
 
-Not authorized error:
+Needs Info Error Response
 ```json
 {
-    "status":"error",
-    "data":{
-        "code":"not_authorized",
-        "description":"RPT is not authorized."
-    }
+     "status":"error",
+     "data":{
+         "error":"need_info",
+         "error_description":"The authorization server needs additional information in order to determine whether the client is authorized to have these permissions.",
+         "details": {  
+             "error":"need_info",
+             "ticket":"ZXJyb3JfZGV0YWlscw==",
+             "required_claims":[  
+                 {  
+                     "claim_token_format":[  
+                         "http://openid.net/specs/openid-connect-core-1_0.html#IDToken"
+                     ],
+                     "claim_type":"urn:oid:0.9.2342.19200300.100.1.3",
+                     "friendly_name":"email",
+                     "issuer":["https://example.com/idp"],
+                     "name":"email23423453ou453"
+                }
+             ],
+             "redirect_user":"https://as.example.com/rqp_claims?id=2346576421"
+         }
+     }
 }
 ```
 
@@ -639,52 +697,63 @@ Invalid ticket error:
 {
     "status":"error",
     "data":{
-        "code":"invalid_ticket",
-        "description":"Ticket is not valid (outdated or not present on Authorization Server)."
+        "error":"invalid_ticket",
+        "error_description":"Ticket is not valid (outdated or not present on Authorization Server)."
     }
 }
 ```
 
-Invalid rpt error:
+Internal oxd server error:
 ```json
 {
     "status":"error",
     "data":{
-        "code":"invalid_rpt",
-        "description":"RPT is not valid (outdated or not present on Authorization Server)."
+        "error":"internal_error",
+        "error_description":"oxd server failed to handle command. Please check logs for details."
     }
 }
 ```
 
-#### Get Access Token by Refresh Token
+#### UMA RP - Get Claims-Gathering URL
 
-Gets Access Token by Refresh Token.
+`ticket` parameter for this command MUST be newest, in 90% cases it is from `need_info` error.
 
 Request:
 
 ```json
 {
-    "command":"get_access_token_by_refresh_token",
+    "command":"uma_rp_get_claims_gathering_url",
     "params": {
-        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- Required
-        "refresh_token":"I6IjIifX0",                              <- Required, refresh_token from get_tokens_by_code command
-        "scope":["openid","profile"],                             <- Optional. If not specified should grant access with scope provided in previous request
-        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",         <- REQUIRED
+        "ticket": "016f84e8-f9b9-11e0-bd6f-0021cc6004de",        <- REQUIRED
+        "claims_redirect_uri":"https://client.example.com/cb",   <- REQUIRED
+        "protection_access_token": "ejt3425"                     <- OPTIONAL, required if oxd-web is used
     }
 }
 ```
 
-Response:
+Success Response:
 
-```
+```json
 {
     "status":"ok",
     "data":{
-        "access_token":"SlAV32hkKG",
-        "expires_in":3600,
-        "refresh_token":"aaAV32hkKG1"
+        "url":"https://as.com/restv1/uma/gather_claims
+              ?client_id=@!1736.179E.AA60.16B2!0001!8F7C.B9AB!0008!AB77!1A2B
+              &ticket=4678a107-e124-416c-af79-7807f3c31457
+              &claims_redirect_uri=https://client.example.com/cb
+              &state=af0ifjsldkj",
+        "state":"af0ifjsldkj" 
     }
 }
+```
+
+After redirect to claims-gathering url user pass Claims-Gathering Flow and if it is success user is redirected back to `claims_redirect_uri` with new ticket which should be provided with next `uma_rp_get_rpt` call.
+
+Example of response
+
+```
+https://client.example.com/cb?ticket=e8e7bc0b-75de-4939-a9b1-2425dab3d5ec
 ```
 
 ## References
