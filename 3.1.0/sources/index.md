@@ -7,18 +7,20 @@ oxd is a middleware service that can be used to simplify the process of integrat
 
 ## Overview
 
-The oxd server is designed to work as a standalone service demon. oxd is a web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service.
+The oxd consists of :
+- oxd-local - designed to work as a standalone service demon via
+- oxd-web - web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service.
 
-By default, oxd is restricted to `localhost`, which means the oxd APIs can only be reached by services running locally on the server. 
+By default, oxd-local is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
 
-oxd APIs can be called by any application that can make REST calls. In addition, there are native libraries that wrap the
+oxd APIs can be called by any application that can make REST (oxd-local) or socket (oxd-local) calls. In addition, there are native libraries that wrap the
 oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 ## How it Works
 
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
 Step 2: [Deploy oxd](./install/index.md);      
-Step 3: [Configure oxd and add your license](./conf/index.md);      
+Step 3: [Configure oxd-local and add your license](./conf/index.md);      
 Step 4: [Run oxd](./install/index.md);      
 Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
 
