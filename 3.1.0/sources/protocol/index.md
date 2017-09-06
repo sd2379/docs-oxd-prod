@@ -580,40 +580,39 @@ Invalid rpt error:
 }
 ```
 
-## Gluu OAuth2 Access Management API's
+#### Get Access Token by Refresh Token
 
-GAT stands for Gluu Access Token. It is invented by Gluu and is described here: 
-[Gluu OAuth2 Access Management](https://ox.gluu.org/doku.php?id=uma:oauth2_access_management)
+Gets Access Token by Refresh Token.
 
 Request:
 
 ```json
 {
-    "command":"uma_rp_get_gat",
+    "command":"get_access_token_by_refresh_token",
     "params": {
-         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",  <- REQUIRED
-         "scopes": [                                       <- REQUIRED RP should know required scopes in advance
-             "http://photoz.example.com/dev/actions/add",
-             "http://photoz.example.com/dev/actions/view",
-             "http://photoz.example.com/dev/actions/edit"
-         ]
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF", <- Required
+        "refresh_token":"I6IjIifX0",                     <- Required, refresh_token from get_tokens_by_code command
+        "scope":["openid","profile"]                     <- Optional. If not specified should grant access with scope provided in previous request
     }
 }
 ```
 
 Response:
 
-```json
+```
 {
-     "status":"ok",
-     "data":{
-         "rpt":"fg6vF9dft4qmT"
-     }
+    "status":"ok",
+    "data":{
+        "access_token":"SlAV32hkKG",
+        "expires_in":3600,
+        "refresh_token":"aaAV32hkKG1"
+    }
 }
 ```
 
 ## References
 
-- [UMA 1.0.1 Specification](https://docs.kantarainitiative.org/uma/rec-uma-core.html#permission-failure-to-client)
-- [Sample RS of Java Resteasy HTTP interceptor of uma-rs](https://github.com/GluuFederation/uma-rs/blob/master/uma-rs-resteasy/src/main/java/org/xdi/oxd/rs/protect/resteasy/RptPreProcessInterceptor.java)
+- [UMA 2.0 Grant for OAuth 2.0 Authorization Specification](https://docs.kantarainitiative.org/uma/ed/oauth-uma-grant-2.0-06.html)
+- [Federated Authorization for UMA 2.0 Specification](https://docs.kantarainitiative.org/uma/ed/oauth-uma-federated-authz-2.0-07.html)
+- [Java Resteasy HTTP interceptor of uma-rs](https://github.com/GluuFederation/uma-rs/blob/master/uma-rs-resteasy/src/main/java/org/xdi/oxd/rs/protect/resteasy/RptPreProcessInterceptor.java)
 
