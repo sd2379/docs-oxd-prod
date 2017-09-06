@@ -47,7 +47,7 @@ Import oxdCommands class from oxd-play by adding this oxd.
 
 ##Configuration
 
-We need nothing to configuration before start using oxd-play everything can be set on run time but still we can configure our oxd-server's default configurations. 
+We need nothing to configuration before start using oxd-play everything can be set on run time but still we can configure our oxd-local's default configurations. 
 
 !!!**Note:** 
     The website is registered with the OP and its ID is stored in this config file, also are the other peristant information about the website. So the config file needs to be writable for the server.
@@ -90,7 +90,7 @@ catch (Exception e)
     e.printStackTrace();
  }
  
-//oxd_ host - oxd-server host eg.localhost or 127.0.0.1 port - oxd-server listing port (default port is 8099)
+//oxd_ host - oxd-local host eg.localhost or 127.0.0.1 port - oxd-local listing port (default port is 8099)
 
 ```
 

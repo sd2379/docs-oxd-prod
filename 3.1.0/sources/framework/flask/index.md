@@ -26,22 +26,22 @@ a2enmod ssl
 echo "deb http://repo.gluu.org/ubuntu/ trusty-devel main" > /etc/apt/sources.list.d/gluu-devel-repo.list
 curl http://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 apt-get update
-apt-get install gluu-oxd-server
+apt-get install gluu-oxd-local
 ```
 
-### Configuring the oxd-server <!-- Configuration -->
+### Configuring the oxd-local <!-- Configuration -->
 
-Edit the file `/opt/oxd-server/conf/oxd-conf.json`
+Edit the file `/opt/oxd-local/conf/oxd-conf.json`
 
 * Change the OP HOST name to your OpenID Provider domain at the line `"op_host": "https://ce-dev.gluu.org"`
 
-Edit the file `/opt/oxd-server/conf/oxd-default-site-config.json`
+Edit the file `/opt/oxd-local/conf/oxd-default-site-config.json`
 
 * Change the `response_types` line to `"response_types": ["code"]`
 
-Start the oxd-server
+Start the oxd-local
 ```bash
-service gluu-oxd-server start
+service gluu-oxd-local start
 ```
 
 ## Demosite deployment <!-- Sample -->
