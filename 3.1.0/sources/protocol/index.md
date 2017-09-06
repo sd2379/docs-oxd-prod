@@ -25,18 +25,28 @@ Learn more about authentication flows in the
 [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html). 
 
 ### oxd OpenID Connect APIs
-oxd provides six API's for OpenID Connect authentication. In general,
+`oxd-local` provides seven API's for OpenID Connect authentication. In general,
 you can think of the Authorization Code Flow as a three step process: 
 
  - Redirect person to the authorization URL and obtain a code
  - Use code to obtain tokens (access, id_token, refresh)
  - Use access token to obtain user claims
 
-The other three oxd API's are:
+The other four oxd API's are:
  
  - Register site (called once--the first time your application uses oxd)
  - Update site registration (not used often)
  - Logout
+ - Get access token by refresh token
+ 
+**IMPORTANT** : 
+
+In `oxd-web` case before using above workflow it is required to obtain access token to secure interaction between client application and `oxd-web`. 
+
+ - Setup client (returns `client_id` and `client_secret`)
+ - Get client token (pass `client_id` and `client_secret` to obtain `access_token`)
+ 
+ Pass obtained access token as `protection_access_token` to all further calls to `oxd-web`.
 
 #### Register site
 
@@ -317,6 +327,91 @@ Response:
     "status":"ok",
     "data":{
         "uri":"https://<server>/end_session?id_token_hint=<id token>&state=<state>&post_logout_redirect_uri=<...>"
+    }
+}
+```
+
+#### Setup Client
+
+It is required to setup client if `oxd-web` is used. For `oxd-local` it is not required.
+
+Parameters for Setup Client are the same as for Register Site command. The command registers client for communication protection (the one that has to be used to obtain access token (via Get Client Token command) for further passing that access token as `protection_access_token` parameter to other commands.
+
+Request:
+
+```json
+{
+    "command":"setup_client",
+    "params": {
+        "authorization_redirect_uri": "https://client.example.org/cb", <- REQUIRED
+        "op_host":"https://ce-dev.gluu.org"                            <- OPTIONAL (But if missing, must be present in defaults)
+        "post_logout_redirect_uri": "https://client.example.org/cb",   <- OPTIONAL 
+        "application_type": "web",                                     <- OPTIONAL
+        "response_types": ["code"],                                    <- OPTIONAL
+        "grant_types": ["authorization_code"],                         <- OPTIONAL 
+        "scope": ["openid"],                                           <- OPTIONAL
+        "acr_values": ["basic"],                                       <- OPTIONAL
+        "client_name": "",                                             <- OPTIONAL (But if missing, oxd will generate its own non-human readable name)
+        "client_jwks_uri": "",                                         <- OPTIONAL
+        "client_token_endpoint_auth_method": "",                       <- OPTIONAL
+        "client_request_uris": [],                                     <- OPTIONAL
+        "client_logout_uris": [],                                      <- OPTIONAL
+        "client_sector_identifier_uri": [],                            <- OPTIONAL
+        "contacts": ["foo_bar@spam.org"],                              <- OPTIONAL
+        "ui_locales": [],                                              <- OPTIONAL
+        "claims_locales": [],                                          <- OPTIONAL
+        "client_id": "<client id of existing client>",                 <- OPTIONAL ignores all other parameters and skips new client registration forcing to use existing client (client_secret is required if this parameter is set)
+        "client_secret": "<client secret of existing client>",         <- OPTIONAL must be used together with client_secret.
+        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter        
+    }
+}
+```
+
+Response:
+
+```json
+{
+    "status":"ok",
+    "data":{
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",
+        "op_host": "<op host>",
+        "client_id":"<client id>"
+        "client_secret":"<client secret>"
+        "client_registration_access_token":"<Client registration access token>"
+        "client_registration_client_uri":"<URI of client registration>"
+        "client_id_issued_at":"<client_id issued at>"
+        "client_secret_expires_at":"<client_secret expires at>"
+    }
+}
+```
+
+#### Get Client Token
+
+Request:
+
+```json
+{
+    "command":"get_client_token",
+    "params": {
+        "client_id": "<client id>",            <- REQUIRED
+        "client_secret": "<client secret>",    <- REQUIRED
+        "op_host":"https://ce-dev.gluu.org"    <- REQUIRED
+        "op_discovery_path":""                 <- OPTIONAL 
+        "scope":[]                             <- OPTIONAL 
+    }
+}
+```
+
+Response:
+
+```json
+{
+    "status":"ok",
+    "data":{
+        "access_token":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",
+        "expires_in": 399,
+        "refresh_token": "fr459f",
+        "scope": "openid"
     }
 }
 ```
