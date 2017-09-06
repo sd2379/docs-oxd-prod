@@ -7,17 +7,16 @@ oxd is a middleware service that can be used to simplify the process of integrat
 
 ## Overview
 
-The oxd consists of :
-- oxd-local - designed to work as a standalone service demon via sockets.
-- oxd-web - web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service. oxd-web requires oxd-local to be installed.
+The oxd server consists of:
+- oxd-local: the core oxd service, which is designed to work as a standalone service demon via sockets;   
+- oxd-web: an extension added to oxd-local that enables apps to call oxd over the web using `https`. oxd-web is a web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service. 
 
 By default, oxd-local is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
 
 !!! Note 
     oxd-local can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
 
-oxd APIs can be called by any application that can make REST (oxd-local) or socket (oxd-local) calls. In addition, there are native libraries that wrap the
-oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
+oxd APIs can be called by any application that can make REST (oxd-local) or socket (oxd-local) calls. In addition, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 ## How it Works
 
@@ -39,14 +38,16 @@ Step 8: Integrate apps with your OP using the oxd REST API, or one of the native
     If you need an OpenID Connect Provider (OP) to authenticate users, you can use Google or download and deploy the free open source [Gluu Server](https://gluu.org/docs/ce/installation-guide/). 
 
 ## Technical Architecture
-By default, oxd-local is restricted to `localhost`, which means its APIs can only be reached by services running locally on the server. Therefore oxd-local must be installed on each server that hosts a target application. 
+
+### oxd-local
+By default, oxd-local is restricted to `localhost`, which means its APIs can only be reached by services running locally on the server. oxd-local must be installed on each server that hosts a target application. 
 
 ![oxd-technical-architecture](https://cloud.githubusercontent.com/assets/5271048/22804205/919112e8-eedd-11e6-85a7-60eab8f51585.png)
 
-## Protocol 
-The oxd server supports the OpenID Connect and UMA profiles of OAuth 2.0. OpenID Connect can be used to send a user for authentication and gather identity information about the user. UMA can be used to manage what digital resources the user should have access to.
+### oxd-web
+oxd-web is an optional extension that enables apps to call oxd over the web using https. With the oxd-web extension installed, you can have many applications use one oxd server. 
 
-Learn more in the [protocol section](./protocol/index.md)
+<insert diagram>. 
 
 ## Installation
 
@@ -58,6 +59,11 @@ Follow [these instructions](./conf/index.md) to configure oxd.
 
 !!! Note
     You will need a valid license to properly configure the oxd server. If you have not yet registered for a license, visit the [oxd website](https://oxd.gluu.org). 
+
+## Protocol 
+The oxd server supports the OpenID Connect and UMA profiles of OAuth 2.0. OpenID Connect can be used to send a user for authentication and gather identity information about the user. UMA can be used to manage what digital resources the user should have access to.
+
+Learn more in the [protocol section](./protocol/index.md)
 
 ## Libraries
 oxd client libraries provide simple, flexible, powerful access to the oxd OpenID Connect and UMA authentication and authorization APIs.     
