@@ -97,13 +97,13 @@ The oxd server provides the following six methods for authenticating users with 
 
 
 ## Sample code
-Below is a sample pom, for more of pom file, please refer to [snippet](http://ox.gluu.org/maven/org/xdi/oxd-client/3.0.1/oxd-client-3.0.1.pom)
+Below is a sample pom, for more of pom file, please refer to [snippet](https://ox.gluu.org/maven/org/xdi/oxd-client/3.1.0.Final/oxd-client-3.1.0.Final.pom)
 
 ```
 <dependency>
   <artifactId>oxd-client</artifactId>
   <groupId>org.xdi</groupId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.1.0.Final</version>
 </dependency>
 ```
 

@@ -94,7 +94,8 @@ Request:
         "ui_locales": [],                                              <- OPTIONAL
         "claims_locales": [],                                          <- OPTIONAL
         "client_id": "<client id of existing client>",                 <- OPTIONAL ignores all other parameters and skips new client registration forcing to use existing client (client_secret is required if this parameter is set)
-        "client_secret": "<client secret of existing client>"          <- OPTIONAL must be used together with client_secret.
+        "client_secret": "<client secret of existing client>",         <- OPTIONAL must be used together with client_secret.
+        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter        
     }
 }
 ```
@@ -138,6 +139,7 @@ Request:
         "contacts":["foo_bar@spam.org"],                              <- OPTIONAL
         "ui_locales":[],                                              <- OPTIONAL
         "claims_locales":[],                                          <- OPTIONAL
+        "protection_access_token":"<access token of the client>"      <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -169,10 +171,11 @@ Request:
         "scope": ["openid"],                              <- optional, may be skipped (by default takes scopes that was registered during register_site command)
         "acr_values": ["duo"],                            <- optional, may be skipped (default is basic)
         "prompt": "login",                                <- optional, skipped if no value specified or missed. prompt=login is required if you want to force alter current user session (in case user is already logged in from site1 and site2 construsts authorization request and want to force alter current user session)
-        "custom_parameters": {
+        "custom_parameters": {                            <- optional, custom parameters
             "param1":"value1",
             "param2":"value2"
-        }
+        },
+        "protection_access_token":"<access token of the client>" <- optional for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -213,9 +216,10 @@ Request:
 {
     "command":"get_tokens_by_code",
     "params": {
-        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF", <- Required
-        "code":"I6IjIifX0",                              <- Required, code from OP redirect url (see example above)
-        "state":"af0ifjsldkj"                            <- Required
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- Required
+        "code":"I6IjIifX0",                                       <- Required, code from OP redirect url (see example above)
+        "state":"af0ifjsldkj",                                    <- Required
+        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -254,8 +258,9 @@ Request:
 {
     "command":"get_user_info",
     "params": {
-        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",
-        "access_token":"SlAV32hkKG"
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",               <- REQUIRED
+        "access_token":"SlAV32hkKG",                                   <- REQUIRED
+        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -296,10 +301,11 @@ Request:
     "command":"get_logout_uri",
     "params": {
         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",
-        "id_token_hint": "eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso",<-- OPTIONAL (oxd server will use last used ID Token)
-        "post_logout_redirect_uri": "<post logout redirect uri here>",        <-- OPTIONAL
-        "state": "<site state>",                                              <-- OPTIONAL
-        "session_state": "<session state>"                                    <-- OPTIONAL
+        "id_token_hint": "eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso",<- OPTIONAL (oxd server will use last used ID Token)
+        "post_logout_redirect_uri": "<post logout redirect uri here>",        <- OPTIONAL
+        "state": "<site state>",                                              <- OPTIONAL
+        "session_state": "<session state>",                                   <- OPTIONAL
+        "protection_access_token":"<access token of the client>"              <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -315,10 +321,10 @@ Response:
 }
 ```
 
-## UMA Authorization 
-UMA is a profile of OAuth 2.0 that defines RESTful, JSON-based, standardized flows and constructs for coordinating the protection of any API or web resource. oxd makes it easy to secure applications with UMA so that access management decisions--like who should be able to access which resources, using which devices, from which networks, etc.--can be delegated to your Gluu Server. 
+## UMA 2 Authorization 
+UMA 2 is a profile of OAuth 2.0 that defines RESTful, JSON-based, standardized flows and constructs for coordinating the protection of any API or web resource. oxd makes it easy to secure applications with UMA 2 so that access management decisions--like who should be able to access which resources, using which devices, from which networks, etc.--can be delegated to your Gluu Server. 
 
-### UMA Resource Server API's
+### UMA 2 Resource Server API's
 
 A client, acting as an [OAuth2 Resource Server](https://tools.ietf.org/html/rfc6749#section-1.1),
 MUST:
@@ -396,7 +402,8 @@ Request:
                     }
                 ]
             }
-        ]
+        ],
+        "protection_access_token":"<access token of the client>"      <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -420,7 +427,8 @@ Request:
         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",
         "rpt":"eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso",    <-- REQUIRED RPT or blank value if absent (not send by RP)
         "path":"<path of resource>",                                   <-- REQUIRED Path of resource (e.g. http://rs.com/phones), /phones should be passed
-        "http_method":"<http method of RP request>"                    <-- REQUIRED Http method of RP request (GET, POST, PUT, DELETE)
+        "http_method":"<http method of RP request>",                   <-- REQUIRED Http method of RP request (GET, POST, PUT, DELETE)
+        "protection_access_token":"<access token of the client>"       <-- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -491,37 +499,9 @@ Resource is not protected
 }
 ```
 
-### UMA Client API's
+### UMA 2 Client API's
 
-If your application is calling UMA protected resources, use these API's to obtain an RPT token.
-
-#### UMA RP - Get RPT
-
-For latest and most up to date parameters of command please check 
-latest successful [jenkins build](https://ox.gluu.org/jenkins/job/oxd)
-
-Request:
-
-```json
-{
-    "command":"uma_rp_get_rpt",
-    "params": {
-         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",  <- REQUIRED
-         "force_new": false                                <- REQUIRED indicates whether return new RPT, in general should be false, so oxd server can cache/reuse same RPT
-    }
-}
-```
-
-Response:
-
-```json
-{
-     "status":"ok",
-     "data":{
-         "rpt":"vF9dft4qmT"
-     }
-}
-```
+If your application is calling UMA 2 protected resources, use these API's to obtain an RPT token.
 
 #### UMA RP - Authorize RPT
 
@@ -531,9 +511,10 @@ Request:
 {
     "command":"uma_rp_authorize_rpt",
     "params": {
-         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",  <- REQUIRED
-         "rpt": "vF9dft4qmT",                              <- REQUIRED
-         "ticket": "016f84e8-f9b9-11e0-bd6f-0021cc6004de"  <- REQUIRED
+         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- REQUIRED
+         "rpt": "vF9dft4qmT",                                      <- REQUIRED
+         "ticket": "016f84e8-f9b9-11e0-bd6f-0021cc6004de",         <- REQUIRED
+         "protection_access_token":"<access token of the client>"  <- OPTIONAL for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -590,9 +571,10 @@ Request:
 {
     "command":"get_access_token_by_refresh_token",
     "params": {
-        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF", <- Required
-        "refresh_token":"I6IjIifX0",                     <- Required, refresh_token from get_tokens_by_code command
-        "scope":["openid","profile"]                     <- Optional. If not specified should grant access with scope provided in previous request
+        "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- Required
+        "refresh_token":"I6IjIifX0",                              <- Required, refresh_token from get_tokens_by_code command
+        "scope":["openid","profile"],                             <- Optional. If not specified should grant access with scope provided in previous request
+        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-local` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-local`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -615,4 +597,3 @@ Response:
 - [UMA 2.0 Grant for OAuth 2.0 Authorization Specification](https://docs.kantarainitiative.org/uma/ed/oauth-uma-grant-2.0-06.html)
 - [Federated Authorization for UMA 2.0 Specification](https://docs.kantarainitiative.org/uma/ed/oauth-uma-federated-authz-2.0-07.html)
 - [Java Resteasy HTTP interceptor of uma-rs](https://github.com/GluuFederation/uma-rs/blob/master/uma-rs-resteasy/src/main/java/org/xdi/oxd/rs/protect/resteasy/RptPreProcessInterceptor.java)
-
