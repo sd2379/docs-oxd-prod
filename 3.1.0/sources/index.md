@@ -120,7 +120,7 @@ oxd-server is a standalon service with socket connection. By default it's restri
 oxd-https-extension is a standalone RESTful Jetty based server which accepts HTTP calls and redirects them to `oxd-server`. In order to use `oxd-https-extension` oxd server must be installed. 
 
 **Where do I deploy oxd-server?**    
-oxd-server is deployed on the same server as the web application(s) you want to protect.
+oxd-server is deployed on the same server as the web application(s) you want to protect. With the oxd-https-extension oxd-server can be deployed on its own standalone server.
 
 **Why should I use oxd?**     
 oxd offers a few key improvements over the traditional model of embedding OAuth 2.0 code in your applications:
