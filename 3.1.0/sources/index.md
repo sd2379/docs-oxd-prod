@@ -9,9 +9,11 @@ oxd is a middleware service that simplifies and standardizes the process of inte
 
 The oxd server is designed to work as a standalone service demon via sockets. By default, the oxd-server is restricted to `localhost`, which means oxd needs to be installed on each server hosting applications you want secured by your OP. 
 
-With the oxd-https-extension running, you can host your oxd-server on a dedicated machine, enabling all your apps to call your central oxd service over the web using `https`. 
+However, oxd 3.1 introduces a new component called the oxd-https-extension. With the oxd-https-extension running, you can host the oxd-server on one or more dedicated machines, enabling all your apps to make use of a central oxd service over the web. 
 
-In addition to a simple REST API, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
+The primary benefit of the oxd-https-extension is easier maintenance--fewer oxd intallations will result in less maintenance and easier upgrades. 
+
+To integrate applications, oxd exposes a simple REST API and native libraries that wrap the API for Php, Java, Python, Node, Ruby C#, and .Net.
 
 !!! Note 
     oxd-server can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
