@@ -1,6 +1,6 @@
 # OpenID Connect & UMA Protocol Overview
 
-The oxd server supports the OpenID Connect and UMA profiles of OAuth 2.0. OpenID Connect can be used to send a user for authentication and gather identity information about the user. UMA can be used to manage what digital resources the user should have access to.
+The oxd server supports the OpenID Connect and UMA 2 profiles of OAuth 2.0. OpenID Connect can be used to send a user for authentication and gather identity information about the user. UMA 2 can be used to manage what digital resources the user should have access to.
 
 ## OpenID Connect Authentication
 
@@ -168,7 +168,11 @@ Request:
         "oxd_id": "6F9619FF-8B86-D011-B42D-00CF4FC964FF", <- required, obtained after registration
         "scope": ["openid"],                              <- optional, may be skipped (by default takes scopes that was registered during register_site command)
         "acr_values": ["duo"],                            <- optional, may be skipped (default is basic)
-        "prompt": "login"                                 <- optional, skipped if no value specified or missed. prompt=login is required if you want to force alter current user session (in case user is already logged in from site1 and site2 construsts authorization request and want to force alter current user session)
+        "prompt": "login",                                <- optional, skipped if no value specified or missed. prompt=login is required if you want to force alter current user session (in case user is already logged in from site1 and site2 construsts authorization request and want to force alter current user session)
+        "custom_parameters": {
+            "param1":"value1",
+            "param2":"value2"
+        }
     }
 }
 ```
