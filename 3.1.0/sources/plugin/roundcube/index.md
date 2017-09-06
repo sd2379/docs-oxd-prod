@@ -44,7 +44,7 @@ In your RoundCube admin menu panel you should now see the OpenID Connect menu ta
 2. Only register and allow ongoing access to users with one or more of the following roles in the OP: Using this option you can limit login to users who have a specified role in the OP, for instance `roundcube`. This is not configurable in all OP's. It is configurable if you are using a Gluu Server. [Follow the instructions below](#role-based-enrollment) to limit access based on an OP role. 
 3. URI of the OpenID Provider: insert the URI of the OpenID Connect Provider.
 4. Custom URI after logout: custom URI after logout (for example "Thank you" page).
-5. oxd port: enter the oxd-server port (you can find this in the `oxd-server/conf/oxd-conf.json` file).
+5. oxd port: enter the oxd-local port (you can find this in the `oxd-local/conf/oxd-conf.json` file).
 6. Click `Register` to continue.
 
 If your OpenID Provider supports dynamic registration, no additional steps are required in the general tab and you can navigate to the [OpenID Connect Configuration](#openid-connect-configuration) tab. 

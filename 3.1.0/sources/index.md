@@ -19,9 +19,9 @@ oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 ## How it Works
 
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
-Step 2: [Deploy oxd](./install/index.md);      
+Step 2: [Deploy oxd-local](./install/index.md);      
 Step 3: [Configure oxd-local and add your license](./conf/index.md);      
-Step 4: [Run oxd](./install/index.md);      
+Step 4: [Run oxd-local](./install/index.md);      
 Step 5: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
 
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 

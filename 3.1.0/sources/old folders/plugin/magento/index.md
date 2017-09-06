@@ -57,7 +57,7 @@ In your Magento admin menu panel you should now see the OpenID Connect menu tab.
 3. New Customer Default Group: specify which group to give to new customer upon registration.
 4. URI of the OpenID Provider: insert the URI of the OpenID Connect Provider.
 5. Custom URI after logout: custom URI after logout (for example "Thank you" page).
-6. oxd port: enter the oxd-server port (you can find this in the `oxd-server/conf/oxd-conf.json` file).
+6. oxd port: enter the oxd-local port (you can find this in the `oxd-local/conf/oxd-conf.json` file).
 7. Click `Register` to continue.
 
 If your OpenID Provider supports dynamic registration, no additional steps are required in the general tab and you can navigate to the [OpenID Connect Configuration](#openid-connect-configuration) tab.
