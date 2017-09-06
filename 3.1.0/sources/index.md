@@ -20,11 +20,11 @@ With both components installed, oxd APIs can be called by any application that c
 
 ## How it Works
 
-Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);      
-Step 2: [Deploy oxd-local](./install/index.md);      
-Step 3 (optional): Deploy oxd-web (if you need to support REST calls to oxd);
-Step 4: [Configure oxd](./conf/index.md);      
-Step 5: [Run oxd](./install/index.md);      
+Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);       
+Step 2: [Deploy oxd-local](./install/index.md);        
+Step 3: Deploy oxd-web (optional if you need to support REST calls to oxd);     
+Step 4: [Configure oxd](./conf/index.md);         
+Step 5: [Run oxd](./install/index.md);        
 Step 6: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
 
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
