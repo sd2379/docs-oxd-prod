@@ -1,6 +1,6 @@
 # oxd 3.1.0 Documentation
 
-oxd is a middleware service that can be used to simplify and standardize the process of integrating server-side web applications with a standard OpenID Connect Provider (OP) like the [Gluu Server](https://gluu.org/gluu-server).
+oxd is a middleware service that simplifies and standardizes the process of integrating server-side web applications with a standard OpenID Connect Provider (OP) like the [Gluu Server](https://gluu.org/gluu-server).
 
 !!! Note
     If you need to integrate other types of apps with your Gluu Server, like single-page apps (SPAs) or native apps, review the [SSO integration guide](https://gluu.org/docs/ce/integration/) in the Gluu Server documentation.    
