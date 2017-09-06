@@ -1,22 +1,22 @@
 # oxd 3.1.0 Documentation
 
-oxd is a middleware service that can be used to simplify the process of integrating server-side web applications with a standard OpenID Connect Provider (OP) like the [Gluu Server](https://gluu.org/gluu-server).
+oxd is a middleware service that can be used to simplify and standardize the process of integrating server-side web applications with a standard OpenID Connect Provider (OP) like the [Gluu Server](https://gluu.org/gluu-server).
 
 !!! Note
     If you need to integrate other types of apps with your Gluu Server, like single-page apps (SPAs) or native apps, review the [SSO integration guide](https://gluu.org/docs/ce/integration/) in the Gluu Server documentation.    
 
 ## Overview
 
-The oxd server consists of:
-- oxd-local: the core oxd service, which is designed to work as a standalone service demon via sockets;   
+The oxd server consists of two components:
+
+- oxd-local: the core oxd service, which is designed to work as a standalone service demon via sockets. By default, oxd-local is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
+
 - oxd-web: an extension added to oxd-local that enables apps to call oxd over the web using `https`. oxd-web is a web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service. 
 
-By default, oxd-local is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
+With both components installed, oxd APIs can be called by any application that can make REST (oxd-web) or socket (oxd-local) calls. In addition, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 !!! Note 
     oxd-local can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
-
-oxd APIs can be called by any application that can make REST (oxd-local) or socket (oxd-local) calls. In addition, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 ## How it Works
 
@@ -29,8 +29,7 @@ Step 6*: [Configure oxd-web](./conf/index.md);
 Step 7*: [Run oxd-web](./install/index.md);  
 Step 8: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
 
-* Steps 5-8 are optional if it's required to have RESTful communication.    
-
+'* Steps 5-8 are optional if it's required to have RESTful communication.    
 
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
 
