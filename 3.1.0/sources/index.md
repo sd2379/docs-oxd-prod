@@ -7,23 +7,22 @@ oxd is a middleware service that can be used to simplify and standardize the pro
 
 ## Overview
 
-The oxd server is designed to work as a standalone service demon via sockets. By default, oxd is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
+The oxd server is designed to work as a standalone service demon via sockets. By default, oxd server is restricted to `localhost`, which means the oxd-server APIs can only be reached by services running locally on the server. 
 
-With the oxd-https-extension marked `True` in the config file, apps can call oxd over the web using `https`. 
+With the oxd-https-extension marked `True` in the config file, apps can call oxd-server over the web using `https`. 
 
 In addition to a simple REST API, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 !!! Note 
-    oxd-local can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
+    oxd-server can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
 
 ## How it Works
 
 Step 1: [Sign up for a license](https://oxd.gluu.org/account/register/);       
-Step 2: [Deploy oxd-local](./install/index.md);        
-Step 3: Deploy oxd-web (optional if you need to support REST calls to oxd);     
-Step 4: [Configure oxd](./conf/index.md);         
-Step 5: [Run oxd](./install/index.md);        
-Step 6: Integrate apps with your OP using the oxd REST API, or one of the native libraries or plugins.     
+Step 2: [Deploy oxd-server](./install/index.md);        
+Step 3: [Configure oxd-server](./conf/index.md);         
+Step 5: [Run oxd-server](./install/index.md);        
+Step 6: Integrate apps with your OP using the oxd native libraries or plugins.     
 
 [Watch the oxd demo video](https://youtu.be/zZMf84wB2f0). 
 
@@ -32,29 +31,29 @@ Step 6: Integrate apps with your OP using the oxd REST API, or one of the native
 
 ## Technical Architecture
 
-### oxd-local
-By default, oxd-local is restricted to `localhost`, which means its APIs can only be reached by services running locally on the server. oxd-local must be installed on each server that hosts a target application. 
+### oxd-server
+By default, oxd-server is restricted to `localhost`, which means its APIs can only be reached by services running locally on the server. oxd-server must be installed on each server that hosts a target application. 
 
 ![oxd-technical-architecture](https://cloud.githubusercontent.com/assets/5271048/22804205/919112e8-eedd-11e6-85a7-60eab8f51585.png)
 
-### oxd-web
-oxd-web is an optional extension that enables apps to call oxd over the web using https. With the oxd-web extension installed, you can have many applications use one oxd server. 
+### oxd-https-extension
+oxd-https-extension is an optional extension that enables apps to call oxd-server over the web using https. With the oxd-https-extension installed, you can have many applications use one oxd server. 
 
 <insert diagram>. 
 
 ## Installation
 
-Follow [these instructions](./install/index.md) to install and start oxd.
+Follow [these instructions](./install/index.md) to install and start oxd server and oxd-https-extension.
 
 ## Configuration
 
-Follow [these instructions](./conf/index.md) to configure oxd.
+Follow [these instructions](./conf/index.md) to configure oxd server.
 
 !!! Note
     You will need a valid license to properly configure the oxd server. If you have not yet registered for a license, visit the [oxd website](https://oxd.gluu.org). 
 
 ## Protocol 
-The oxd server supports the OpenID Connect and UMA profiles of OAuth 2.0. OpenID Connect can be used to send a user for authentication and gather identity information about the user. UMA can be used to manage what digital resources the user should have access to.
+The oxd server supports the OpenID Connect and UMA 2 profiles of OAuth 2.0. OpenID Connect can be used to send a user for authentication and gather identity information about the user. UMA can be used to manage what digital resources the user should have access to.
 
 Learn more in the [protocol section](./protocol/index.md)
 
@@ -114,14 +113,14 @@ oxd is commercial software licensed by Gluu. Get your license and a $50 credit b
 **What is oxd?**       
 Under oxd we mean oxd-local and oxd-web. oxd is a mediator: it provides API's that can be called by a web application that are easier than directly calling the API's of an OpenID Connect Provider (OP) or an UMA Authorization Server (AS).
 
-**What is oxd-local?**       
-oxd-local is a standalon service with socket connection. By default it's restricted to localhost only (by `localhost_only: true` configuration in `oxd-conf.json`). It's possible to turn off this restriction if set `localhost_only: false` in `oxd-conf.json`
+**What is oxd-server?**       
+oxd-server is a standalon service with socket connection. By default it's restricted to localhost only (by `localhost_only: true` configuration in `oxd-conf.json`). It's possible to turn off this restriction if set `localhost_only: false` in `oxd-conf.json`
 
-**What is oxd-web?**
-oxd-web is a standalone RESTful Jetty based server which accepts HTTP calls and redirects them to `oxd-local`. In order to use `oxd-web` `oxd-local` server must be installed. 
+**What is oxd-https-extension?**
+oxd-https-extension is a standalone RESTful Jetty based server which accepts HTTP calls and redirects them to `oxd-server`. In order to use `oxd-https-extension` oxd server must be installed. 
 
-**Where do I deploy oxd-local?**    
-oxd-local is deployed on the same server as the web application(s) you want to protect.
+**Where do I deploy oxd-server?**    
+oxd-server is deployed on the same server as the web application(s) you want to protect.
 
 **Why should I use oxd?**     
 oxd offers a few key improvements over the traditional model of embedding OAuth 2.0 code in your applications:
