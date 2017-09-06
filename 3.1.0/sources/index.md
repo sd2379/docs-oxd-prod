@@ -9,9 +9,9 @@ oxd is a middleware service that can be used to simplify and standardize the pro
 
 The oxd server is designed to work as a standalone service demon via sockets. By default, oxd is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
 
-With the oxd-https-extension marked `True` in the config file, apps can call oxd over the web using `https`. The https extension is a web server, running in an embedded [Jetty](http://www.eclipse.org/jetty/) server. Start it and stop it like you would any other unix service. 
+With the oxd-https-extension marked `True` in the config file, apps can call oxd over the web using `https`. 
 
-oxd APIs can be called by any application that can make REST (oxd-web) or socket (oxd-local) calls. In addition, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
+In addition to a simple REST API, there are native libraries that wrap the oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
 
 !!! Note 
     oxd-local can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
