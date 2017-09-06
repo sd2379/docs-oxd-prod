@@ -14,7 +14,7 @@ The oxd consists of :
 By default, oxd-local is restricted to `localhost`, which means the oxd-local APIs can only be reached by services running locally on the server. 
 
 !!! Note 
-    oxd-local can be used not only on localhost in protected networks, e.g. VPN, then switch off localhost_only=false configuration.     
+    oxd-local can be used not only on localhost in protected networks, e.g. VPN. To switch off `localhost` mode please put `localhost_only: false` in `oxd-conf.json` configuration.     
 
 oxd APIs can be called by any application that can make REST (oxd-local) or socket (oxd-local) calls. In addition, there are native libraries that wrap the
 oxd APIs, currently available for Php, Java, Python, Node, Ruby C#, and .Net.
