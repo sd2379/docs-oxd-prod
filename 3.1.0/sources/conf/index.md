@@ -58,6 +58,14 @@ oxd-conf.json
 * storage - Possible values: `h2`, `redis`. If `redis` is set then `storage_configuration` must be specified with redis configuration details. 
 * storage_configuration - storage configuration details. Required if `redis` value is set for `storage` key.
 
+Redis storage configuration sample:
+```json
+  "storage_configuration": {
+    "host":"localhost",
+    "port":6379
+  }
+```
+
 Need an oxd-server license? Register on the [oxd website](https://oxd.gluu.org). 
 
 ## oxd-default-site-config.json
