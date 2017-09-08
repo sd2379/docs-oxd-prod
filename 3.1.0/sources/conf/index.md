@@ -31,7 +31,8 @@ oxd-conf.json
     "public_op_key_cache_expiration_in_minutes":60,
     "protect_commands_with_access_token":false,
     "uma2_auto_register_claims_gathering_endpoint_as_redirect_uri_of_client":true,
-    "migration_source_folder_path":""
+    "migration_source_folder_path":"",
+    "storage":"h2"
 }
 ```
 
@@ -54,6 +55,8 @@ oxd-conf.json
 * protect_commands_with_access_token - if you use `oxd-server` standalone locally than this value can be `false`. If `oxd-https-extension` is used then this value MUST be `true` in order to protect communication between `oxd-https-extension` and client application (RP).
 * uma2_auto_register_claims_gathering_endpoint_as_redirect_uri_of_client - says to `oxd-server` whether automatically register `Glaims Gathering Endpoint` as `redirect_uri` for given client. It is useful for UMA 2 clients that wish to force authorization against Gluu Server (OP).
 * migration_source_folder_path - `oxd-server` has built-in migration from older version of `oxd-server` (previously called `oxd-server`). To migrate old json files from previous versions please specify path to folder/directory that contains those json files in this property. Those files will be read and imported one time (during restart `oxd-server` will not import them again). Note, if you are under Windows OS don't forget to escape path separator, e.g. `C:\\OXD_OLD\\oxd-server\\conf`
+* storage - Possible values: `h2`, `redis`. If `redis` is set then `storage_configuration` must be specified with redis configuration details. 
+* storage_configuration - storage configuration details. Required if `redis` value is set for `storage` key.
 
 Need an oxd-server license? Register on the [oxd website](https://oxd.gluu.org). 
 
