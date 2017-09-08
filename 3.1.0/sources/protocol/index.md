@@ -41,12 +41,12 @@ The other four oxd API's are:
  
 **IMPORTANT** : 
 
-In `oxd-web` case before using above workflow it is required to obtain access token to secure interaction between client application and `oxd-web`. 
+In `oxd-https-extension` case before using above workflow it is required to obtain access token to secure interaction between client application and `oxd-https-extension`. 
 
  - Setup client (returns `client_id` and `client_secret`)
  - Get client token (pass `client_id` and `client_secret` to obtain `access_token`)
  
- Pass obtained access token as `protection_access_token` to all further calls to `oxd-web`.
+ Pass obtained access token as `protection_access_token` to all further calls to `oxd-https-extension`.
 
 #### Register site
 
@@ -105,7 +105,7 @@ Request:
         "claims_locales": [],                                          <- OPTIONAL
         "client_id": "<client id of existing client>",                 <- OPTIONAL ignores all other parameters and skips new client registration forcing to use existing client (client_secret is required if this parameter is set)
         "client_secret": "<client secret of existing client>",         <- OPTIONAL must be used together with client_secret.
-        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter        
+        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter        
     }
 }
 ```
@@ -149,7 +149,7 @@ Request:
         "contacts":["foo_bar@spam.org"],                              <- OPTIONAL
         "ui_locales":[],                                              <- OPTIONAL
         "claims_locales":[],                                          <- OPTIONAL
-        "protection_access_token":"<access token of the client>"      <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"      <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -185,7 +185,7 @@ Request:
             "param1":"value1",
             "param2":"value2"
         },
-        "protection_access_token":"<access token of the client>" <- optional for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>" <- optional for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -229,7 +229,7 @@ Request:
         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- Required
         "code":"I6IjIifX0",                                       <- Required, code from OP redirect url (see example above)
         "state":"af0ifjsldkj",                                    <- Required
-        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -270,7 +270,7 @@ Request:
     "params": {
         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",               <- REQUIRED
         "access_token":"SlAV32hkKG",                                   <- REQUIRED
-        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -315,7 +315,7 @@ Request:
         "post_logout_redirect_uri": "<post logout redirect uri here>",        <- OPTIONAL
         "state": "<site state>",                                              <- OPTIONAL
         "session_state": "<session state>",                                   <- OPTIONAL
-        "protection_access_token":"<access token of the client>"              <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"              <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -333,7 +333,7 @@ Response:
 
 #### Setup Client
 
-It is required to setup client if `oxd-web` is used. For `oxd-server` it is not required.
+It is required to setup client if `oxd-https-extension` is used. For `oxd-server` it is not required.
 
 Parameters for Setup Client are the same as for Register Site command. The command registers client for communication protection (the one that has to be used to obtain access token (via Get Client Token command) for further passing that access token as `protection_access_token` parameter to other commands.
 
@@ -362,7 +362,7 @@ Request:
         "claims_locales": [],                                          <- OPTIONAL
         "client_id": "<client id of existing client>",                 <- OPTIONAL ignores all other parameters and skips new client registration forcing to use existing client (client_secret is required if this parameter is set)
         "client_secret": "<client secret of existing client>",         <- OPTIONAL must be used together with client_secret.
-        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter        
+        "protection_access_token":"<access token of the client>"       <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter        
     }
 }
 ```
@@ -429,7 +429,7 @@ Request:
         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",          <- Required
         "refresh_token":"I6IjIifX0",                              <- Required, refresh_token from get_tokens_by_code command
         "scope":["openid","profile"],                             <- Optional. If not specified should grant access with scope provided in previous request
-        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"  <- Optional for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -529,7 +529,7 @@ Request:
                 ]
             }
         ],
-        "protection_access_token":"<access token of the client>"      <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"      <- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -554,7 +554,7 @@ Request:
         "rpt":"eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso",    <-- REQUIRED RPT or blank value if absent (not send by RP)
         "path":"<path of resource>",                                   <-- REQUIRED Path of resource (e.g. http://rs.com/phones), /phones should be passed
         "http_method":"<http method of RP request>",                   <-- REQUIRED Http method of RP request (GET, POST, PUT, DELETE)
-        "protection_access_token":"<access token of the client>"       <-- OPTIONAL for `oxd-server` but REQUIRED for `oxd-web`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
+        "protection_access_token":"<access token of the client>"       <-- OPTIONAL for `oxd-server` but REQUIRED for `oxd-https-extension`. You can switch off/on protection by `oxd-server`'s `protect_commands_with_access_token` configuration parameter
     }
 }
 ```
@@ -645,7 +645,7 @@ Request:
          "rpt": "SSJHBSUSSJHVhjsgvhsgvshgsv",               <- OPTIONAL
          "scope":["read"],                                  <- OPTIONAL,
          "state": "af0ifjsldkj",                            <- OPTIONAL state that is returned from uma_rp_get_claims_gathering_url command
-         "protection_access_token": "ejt3425"               <- OPTIONAL, required if oxd-web is used          
+         "protection_access_token": "ejt3425"               <- OPTIONAL, required if oxd-https-extension is used          
     }
 }
 ```
@@ -727,7 +727,7 @@ Request:
         "oxd_id":"6F9619FF-8B86-D011-B42D-00CF4FC964FF",         <- REQUIRED
         "ticket": "016f84e8-f9b9-11e0-bd6f-0021cc6004de",        <- REQUIRED
         "claims_redirect_uri":"https://client.example.com/cb",   <- REQUIRED
-        "protection_access_token": "ejt3425"                     <- OPTIONAL, required if oxd-web is used
+        "protection_access_token": "ejt3425"                     <- OPTIONAL, required if oxd-https-extension is used
     }
 }
 ```
