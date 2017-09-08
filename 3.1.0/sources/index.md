@@ -113,7 +113,7 @@ oxd is commercial software licensed by Gluu. Get your license and a $50 credit b
 ## FAQ's
 
 **What is oxd?**       
-Under oxd we mean oxd-local and oxd-web. oxd is a mediator: it provides API's that can be called by a web application that are easier than directly calling the API's of an OpenID Connect Provider (OP) or an UMA Authorization Server (AS).
+Under oxd we mean oxd-server and oxd-web. oxd is a mediator: it provides API's that can be called by a web application that are easier than directly calling the API's of an OpenID Connect Provider (OP) or an UMA Authorization Server (AS).
 
 **What is oxd-server?**       
 oxd-server is a standalon service with socket connection. By default it's restricted to localhost only (by `localhost_only: true` configuration in `oxd-conf.json`). It's possible to turn off this restriction if set `localhost_only: false` in `oxd-conf.json`

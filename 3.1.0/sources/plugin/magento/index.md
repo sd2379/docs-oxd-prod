@@ -87,7 +87,7 @@ If you are using another OP it will be something like `https://idp.example.com`.
 If you don't have a preferred logout page, we recommend simply entering the URL of your website homepage URL. 
 If you leave this field blank the user will see the default logout page presented by magento. 
 
-3. oxd port: Enter the oxd-local port, which you can find in your `oxd-local/conf/oxd-conf.json` file.
+3. oxd port: Enter the oxd-server port, which you can find in your `oxd-server/conf/oxd-conf.json` file.
 
 4. Click `Register` to continue.
 

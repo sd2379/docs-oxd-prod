@@ -64,7 +64,7 @@ A short description of each field follows:
 
 2. Custom URI after logout: Provide a URL for a landing page to redirect users after logout of the WP site, for instance `https://example.com/thank-you`. If you don't have a preferred logout page we recommend simply entering your website homepage URL. If you leave this field blank the user will see the default logout page presented by SugarCRM. 
 
-3. oxd port: Enter the oxd-local port, which you can find in your `oxd-local/conf/oxd-conf.json` file.
+3. oxd port: Enter the oxd-server port, which you can find in your `oxd-server/conf/oxd-conf.json` file.
 
 4. Click `Register` to continue.
    

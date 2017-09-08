@@ -13,8 +13,8 @@ $ sudo apt-get install apache2
 $ a2enmod ssl
 ```
 
-### Installing and configuring the oxd-local
-You can download the oxd-local and follow the installation instructions from [here](https://www.gluu.org/docs-oxd)
+### Installing and configuring the oxd-server
+You can download the oxd-server and follow the installation instructions from [here](https://www.gluu.org/docs-oxd)
 
 ## Demosite deployment
 

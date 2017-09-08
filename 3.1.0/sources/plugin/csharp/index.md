@@ -13,7 +13,7 @@ to access user information from a OpenID Connect Provider (OP) by using the oxd 
 ## Install oxd Server
 Please use the links below to download the `oxd Server` zip file. For complete installation instructions, please see the [Install Guide](https://oxd.gluu.org/docs/oxdserver/install/)
 
-[oxd Server](https://ox.gluu.org/maven/org/xdi/oxd-local/3.0.1/oxd-local-3.0.1-distribution.zip)
+[oxd Server](https://ox.gluu.org/maven/org/xdi/oxd-server/3.0.1/oxd-server-3.0.1-distribution.zip)
 
 * oxd-csharp is oxd Server client implemented in C# language which acts 
 according to [Protocol](./protocol/).

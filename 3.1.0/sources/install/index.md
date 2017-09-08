@@ -1,4 +1,4 @@
-# oxd-local Server Installation 
+# oxd-server Server Installation 
 
 ## Linux Packages
 
@@ -8,13 +8,13 @@
 # echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 # apt-get update
-# apt-get install gluu-oxd-local
+# apt-get install gluu-oxd-server
 ```
-Now configure oxd-local following the [configuration instructions](../conf/index.md). 
+Now configure oxd-server following the [configuration instructions](../conf/index.md). 
 
-Then run the following command to start the oxd-local server:
+Then run the following command to start the oxd-server server:
 
-`# service gluu-oxd-local start`
+`# service gluu-oxd-server start`
 
 
 ### Ubuntu 16.04 (xenial)
@@ -23,13 +23,13 @@ Then run the following command to start the oxd-local server:
 echo "deb https://repo.gluu.org/ubuntu/ xenial main" > /etc/apt/sources.list.d/gluu-repo.list
 curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 apt-get update
-apt-get install gluu-oxd-local
+apt-get install gluu-oxd-server
 ```
 Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 Then run the following command to start the oxd server:
 
-`service gluu-oxd-local start`
+`service gluu-oxd-server start`
 
 ### Debian 8 (Jessie)
 
@@ -37,13 +37,13 @@ Then run the following command to start the oxd server:
 echo "deb https://repo.gluu.org/debian/ jessie main" > /etc/apt/sources.list.d/gluu-repo.list
 curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 apt-get update
-apt-get install gluu-oxd-local
+apt-get install gluu-oxd-server
 ```
 Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 Then run the following command to start the oxd server:
 
-`service gluu-oxd-local start`
+`service gluu-oxd-server start`
 
 ### CentOS 6
 
@@ -52,13 +52,13 @@ Then run the following command to start the oxd server:
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # yum clean all
-# yum install gluu-oxd-local
+# yum install gluu-oxd-server
 ```
 Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 Then run the following command to start the oxd server:
 
-`# service gluu-oxd-local start`
+`# service gluu-oxd-server start`
 
 ### CentOS 7
 
@@ -67,13 +67,13 @@ Then run the following command to start the oxd server:
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # yum clean all
-# yum install gluu-oxd-local
+# yum install gluu-oxd-server
 ```
 Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 Then run the following command to start the oxd server:
 
-`# service gluu-oxd-local start`
+`# service gluu-oxd-server start`
 
 ### RHEL 6
 
@@ -82,13 +82,13 @@ Then run the following command to start the oxd server:
 # wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # yum clean all
-# yum install gluu-oxd-local
+# yum install gluu-oxd-server
 ```
 Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 Then run the following command to start the oxd server:
 
-`# service gluu-oxd-local start`
+`# service gluu-oxd-server start`
 
 ### RHEL 7
 
@@ -97,13 +97,13 @@ wget https://repo.gluu.org/rhel/Gluu-rhel7.repo -O /etc/yum.repos.d/Gluu.repo
 wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 yum clean all
-yum install gluu-oxd-local
+yum install gluu-oxd-server
 ```
 Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 Then run the following command to start the oxd server:
 
-`service gluu-oxd-local start`
+`service gluu-oxd-server start`
 
 ## Manual installation
 
@@ -112,37 +112,37 @@ Java version 1.7 or higher. But otherwise it's self-contained, and you can just 
 and run it.
 
 It is not necessary to install oxd in Windows, it can be downloaded and run. The `oxd Server` is 
-available for download from [maven repository](http://ox.gluu.org/maven/org/xdi/oxd-local).
+available for download from [maven repository](http://ox.gluu.org/maven/org/xdi/oxd-server).
 
 ### Windows
 
-1. Make a folder called `oxd-local` (or whatever you like)
+1. Make a folder called `oxd-server` (or whatever you like)
  
-2. Unzip the [zip distribution](http://ox.gluu.org/maven/org/xdi/oxd-local/3.0.1/oxd-local-3.0.1-distribution.zip)
+2. Unzip the [zip distribution](http://ox.gluu.org/maven/org/xdi/oxd-server/3.0.1/oxd-server-3.0.1-distribution.zip)
 in the above folder you just created. 
 
 3. Now configure oxd following the [configuration instructions](../conf/index.md). 
 
-4. Run `oxd-local/bin/oxd-start.bat`
+4. Run `oxd-server/bin/oxd-start.bat`
 
 ### Unix
 
-1. Make a folder called `oxd-local` (or whatever you like), and `cd` to this folder
+1. Make a folder called `oxd-server` (or whatever you like), and `cd` to this folder
  
-2. `$ wget http://ox.gluu.org/maven/org/xdi/oxd-local/3.0.1/oxd-local-3.0.1-distribution.zip`
+2. `$ wget http://ox.gluu.org/maven/org/xdi/oxd-server/3.0.1/oxd-server-3.0.1-distribution.zip`
 
-3. `$ unzip oxd-local-3.0.1-distribution.zip`
+3. `$ unzip oxd-server-3.0.1-distribution.zip`
 
 4. Now configure oxd following the [configuration instructions](../conf/index.md). 
 
 5. `$ nohup bin/oxd-start.sh &`
 
-## Manual Build oxd-local Server
+## Manual Build oxd-server Server
 
-If you're a Java geek, you can build the oxd-local server using [Maven](http://maven.apache.org).
+If you're a Java geek, you can build the oxd-server server using [Maven](http://maven.apache.org).
 
 The code is available in [Github](https://github.com/GluuFederation/oxd). A zip file can be 
-downloaded directly from [this link](https://ox.gluu.org/maven/org/xdi/oxd-local/3.1.0.Final/oxd-local-3.1.0.Final-distribution.zip). 
+downloaded directly from [this link](https://ox.gluu.org/maven/org/xdi/oxd-server/3.1.0.Final/oxd-server-3.1.0.Final-distribution.zip). 
 
 The following command can be run inside the oxd folder to run the build:
 

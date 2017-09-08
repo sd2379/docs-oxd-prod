@@ -15,7 +15,7 @@ Application will not be working if your host does not have https://.
 
 **Prerequisite**
 ```
-You have to install gluu server and oxd-local in your hosting server to use oxd-node library with your oxd-node-demo application.
+You have to install gluu server and oxd-server in your hosting server to use oxd-node library with your oxd-node-demo application.
 ```
 
 # Configuration:
@@ -34,7 +34,7 @@ find exports.app_port=null and enter port no inplace of "null" which ever is fre
 3. From command line, move into demo client application and enter `npm update`, and run it [node index].
 4. Go to web browser and access demo application with this url `https://localhost.com:{port}` (you can use any other port incase if 5053 port is busy in any other process)
 5. Register your website with oxd, fill the site registration form and submit it.
-6. Now your site user can login using oxd-local
+6. Now your site user can login using oxd-server
 
 # Demo Video:
 

@@ -27,7 +27,7 @@ java -jar target/oxd-spring-0.0.1-SNAPSHOT.jar
 Point browser to `https://127.0.0.1:8443/`. And log in into ce-dev2.gluu.org using test credentials: test_user/test_user_password 
 
 !!!***Note:*** 
-    oxd-local must run on *localhost* and be bound to port: *8099*, otherwise you'll need to configure `oxd-spring/src/main/resources/application.properties` file.
+    oxd-server must run on *localhost* and be bound to port: *8099*, otherwise you'll need to configure `oxd-spring/src/main/resources/application.properties` file.
 
 ## Customize oxd-spring
 To use your own server as openid provider you need to modify `oxd.server.op-host` property from `oxd-spring/src/main/resources/application.properties`, e.g:
@@ -70,7 +70,7 @@ catch (Exception e)
     e.printStackTrace();
  }
  
-//oxd_ host - oxd-local host eg.localhost or 127.0.0.1 port - oxd-local listing port (default port is 8099)
+//oxd_ host - oxd-server host eg.localhost or 127.0.0.1 port - oxd-server listing port (default port is 8099)
 
 ```
 

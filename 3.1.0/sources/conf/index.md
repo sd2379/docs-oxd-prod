@@ -47,15 +47,15 @@ oxd-conf.json
 * public_key - Will be supplied when you register for a license. It's very big--make sure you add it as one line with no spaces (if your mail client added line breaks).
 * public_password - Will be supplied when you register for a license.
 * license_password - Will be supplied when you register for a license.
-* support-google-logout - whether to support Google logout or not. Please use it only if you use Google as OP together with `oxd-local`.
+* support-google-logout - whether to support Google logout or not. Please use it only if you use Google as OP together with `oxd-server`.
 * state_expiration_in_minutes - expiration time of `state` parameter in seconds
 * nonce_expiration_in_minutes - expiration time of `nonce` parameter in seconds
 * public_op_key_cache_expiration_in_minutes - OP keys are put into cache after fetching. This value controls how long to keep it in cache (after expiration on first attempt keys are fetched again from OP).
-* protect_commands_with_access_token - if you use `oxd-local` standalone locally than this value can be `false`. If `oxd-web` is used then this value MUST be `true` in order to protect communication between `oxd-web` and client application (RP).
-* uma2_auto_register_claims_gathering_endpoint_as_redirect_uri_of_client - says to `oxd-local` whether automatically register `Glaims Gathering Endpoint` as `redirect_uri` for given client. It is useful for UMA 2 clients that wish to force authorization against Gluu Server (OP).
-* migration_source_folder_path - `oxd-local` has built-in migration from older version of `oxd-local` (previously called `oxd-server`). To migrate old json files from previous versions please specify path to folder/directory that contains those json files in this property. Those files will be read and imported one time (during restart `oxd-local` will not import them again). Note, if you are under Windows OS don't forget to escape path separator, e.g. `C:\\OXD_OLD\\oxd-server\\conf`
+* protect_commands_with_access_token - if you use `oxd-server` standalone locally than this value can be `false`. If `oxd-web` is used then this value MUST be `true` in order to protect communication between `oxd-web` and client application (RP).
+* uma2_auto_register_claims_gathering_endpoint_as_redirect_uri_of_client - says to `oxd-server` whether automatically register `Glaims Gathering Endpoint` as `redirect_uri` for given client. It is useful for UMA 2 clients that wish to force authorization against Gluu Server (OP).
+* migration_source_folder_path - `oxd-server` has built-in migration from older version of `oxd-server` (previously called `oxd-server`). To migrate old json files from previous versions please specify path to folder/directory that contains those json files in this property. Those files will be read and imported one time (during restart `oxd-server` will not import them again). Note, if you are under Windows OS don't forget to escape path separator, e.g. `C:\\OXD_OLD\\oxd-server\\conf`
 
-Need an oxd-local license? Register on the [oxd website](https://oxd.gluu.org). 
+Need an oxd-server license? Register on the [oxd website](https://oxd.gluu.org). 
 
 ## oxd-default-site-config.json
 

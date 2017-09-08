@@ -65,7 +65,7 @@ for instance `https://example.com/thank-you`. If you don't have a preferred logo
 entering your website homepage URL. If you leave this field blank the user will see the default logout page 
 presented by OpenCart. 
 
-3. oxd port: Enter the oxd-local port, which you can find in your `oxd-local/conf/oxd-conf.json` file.
+3. oxd port: Enter the oxd-server port, which you can find in your `oxd-server/conf/oxd-conf.json` file.
 
 4. Click `Register` to continue.
 
