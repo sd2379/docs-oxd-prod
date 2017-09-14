@@ -10,10 +10,10 @@ like the [Gluu Server](https://gluu.org/gluu-server) or Google, for login.
 
 [Download a sample project](https://github.com/GluuFederation/oxd-python/archive/master.zip) specific to this oxd library.
 
-### System Requirements
+## System Requirements
 
 - Ubuntu / Debian / CentOS / RHEL / Windows 7 or higher / Windows Server 2008 or higher
-- Python 2.7 or higher
+- Python 2.7
 - Flask
 - oxdpython 3.1.0
 - Flask-SSLify
@@ -316,8 +316,7 @@ refreshToken = aaAV32hkKG1
 ```
 ### Get Access Token by Refresh Token
 
-The `get_access_token_by_refresh_token` method is used to get a fresh access token and refresh 
-token by using the refresh token which is obtained from `get_tokens_by_code` method.
+The `get_access_token_by_refresh_token` method is used to get a fresh access token and refresh token by using the refresh token which is obtained from `get_tokens_by_code` method.
 
 **Required parameters:**
 
@@ -394,18 +393,13 @@ logout_url = https://<server>/end_session?id_token_hint=<id token>&state=<state>
 ```
 ### UMA RS Protect
 
-`uma_rs_protect` method is used for protecting resource by the Resource Server. 
-Resource server need to construct the command which will protect the resource.
-The command will contain api path, http methods (POST,GET, PUT) and scopes. Scopes can be mapped 
-with authorization policy (uma_rpt_policies). If no authorization policy mapped, 
-`uma_rs_check_access` method will always return access as granted. To know more about uma_rpt_policies 
-you can check this [document](https://github.com/GluuFederation/docs-ce-prod/blob/3.1.0/3.1.0/source/admin-guide/uma.md#uma-rpt-authorization-policies).
+`uma_rs_protect` method is used for protecting resource by the Resource Server. Resource server need to construct the command which will protect the resource.
+The command will contain api path, http methods (POST,GET, PUT) and scopes. Scopes can be mapped with authorization policy (uma_rpt_policies). If no authorization policy mapped, uma_rs_check_access method will always return access as granted. To know more about uma_rpt_policies you can check this [document]().
 
 **Required parameters:**
 
 - protection_access_token: Generated from get_client_token method.
-- resources: One or more protected resources that a resource server manages as a set, abstractly. 
-In authorization policy terminology, a resource set is the "object" being protected. 
+- resources: One or more protected resources that a resource server manages as a set, abstractly. In authorization policy terminology, a resource set is the "object" being protected. 
 
 **Request:**
 
@@ -609,5 +603,4 @@ result = oxc.uma_rp_get_claims_gathering_url(protection_access_token, claims_red
 ```
 
 ## Support
-Please report technical issues and suspected bugs on our [support page](https://support.gluu.org/). 
-You can use the same credentials you created to register for your oxd license to sign in on Gluu support.
+Please report technical issues and suspected bugs on our [support page](https://support.gluu.org/). You can use the same credentials you created to register for your oxd license to sign in on Gluu support.
